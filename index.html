@@ -212,7 +212,7 @@
         let highlightedCells = [];
 
         while (highlightedCells.length < 5 || (highlightedCells.length == 5 && Math.random() < 0.5)) {
-            let randomCellIndex = Math.floor(Math.random() * 9);
+            let randomCellIndex = Math.floor(Math.random() * 25);
             if (!highlightedCells.includes(randomCellIndex)) {
                 highlightedCells.push(randomCellIndex);
             }
