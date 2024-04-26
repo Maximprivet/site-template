@@ -45,6 +45,20 @@
             0% {opacity: 0;}
             100% {opacity: 1;}
         }
+        .selector{
+            display: flex;
+            height: 200px;
+            position: relative;
+            gap: 2em;
+            
+        }
+        .selector button{
+            height: 145px;
+            width:  145px;
+            font-size: 70px;
+            text-align: center;
+            margin-top: 0;
+        }
         .cell {
             align-self: start;
             display: flex;
@@ -115,6 +129,17 @@
         color: rgb(87, 54, 23);
         height: 530px;
     }
+    .lov-block{
+        display: flex;
+        gap: 10px;
+    }
+    .lov-block p{
+        
+        margin-top: 1em;
+        margin-bottom: .3em;
+        color:white;
+        font-size: 50px;
+    }
     </style>
 </head>
 <body>
@@ -125,6 +150,13 @@
             <!-- <div class="some">
                 <p>Нажмите на кнопку "Получить сигнал"</p>
             </div> -->
+        </div>
+        <div class="lov-block">
+         <p class="txt-lov">Кол-во ловушек: </p><p id="number" class="txt-lov">1</p>   
+        </div>
+        
+        <div class="selector">
+            <button onclick="minus()">-</button><button onclick="plus()">+</button>
         </div>
         <div class="chance">
             <p id="myNumber">Шанс: -</p>
@@ -138,7 +170,38 @@
 
 
 <script>
-
+    function plus(){
+        
+        let number = Number(document.getElementById('number').textContent);
+        console.log(number)
+        if (number == 1){
+            document.getElementById("number").innerHTML =  3
+            
+        }
+        if (number == 3){
+            document.getElementById("number").innerHTML =  5
+            
+        }
+        if (number == 5){
+            
+            document.getElementById("number").innerHTML =  7
+        }
+    }
+    function minus(){
+        let number = Number(document.getElementById('number').textContent);
+        if (number == 3){
+            document.getElementById("number").innerHTML =  1
+            
+        }
+        if (number == 5){
+            document.getElementById("number").innerHTML =  3
+            
+        }
+        if (number == 7){
+            
+            document.getElementById("number").innerHTML =  5
+        }
+    }
     let board = document.getElementById('gameBoard');
 
     function showRandomCells() {
@@ -147,7 +210,7 @@
 
         let highlightedCells = [];
 
-        while (highlightedCells.length < 3) {
+        while (highlightedCells.length < 5 || (highlightedCells.length == 5 && Math.random() < 0.5)) {
             let randomCellIndex = Math.floor(Math.random() * 9);
             if (!highlightedCells.includes(randomCellIndex)) {
                 highlightedCells.push(randomCellIndex);
@@ -171,10 +234,10 @@
                 if (i < 25){
                    myLoop()
                 } else {
-                    document.getElementById("myNumber").innerHTML =  "Шанс: " + (Math.floor(Math.random() * (90 - 65)) + 65) + " %";
+                    document.getElementById("myNumber").innerHTML =  "Шанс: " + String(Math.random() * (90 - 80) + 80).substring(0, 5) + " %";
                 }
 
-                }, 100);
+                }, 0);
         }
         myLoop()
         board.style.display = 'grid';
